@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerdas Cermat PA GMAHK SALEMBA</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <img src="logo.png" alt="Logo" class="top-right-logo">
+    <div class="container">
+        <header>
+            <h1>Cerdas Cermat PA<br>GMAHK SALEMBA</h1>
+        </header>
+
+        <section class="timer-section">
+            <div class="timer-card glass">
+                <h2>Count down</h2>
+                <div class="timer-display-controls">
+                    <button id="btn-minus-time" class="time-adjust">-</button>
+                    <div id="timer-display" class="timer-display">10 s</div>
+                    <button id="btn-plus-time" class="time-adjust">+</button>
+                </div>
+                <div class="timer-controls">
+                    <button id="btn-start" class="btn primary">Start</button>
+                    <button id="btn-stop" class="btn danger">Stop</button>
+                    <button id="btn-reset" class="btn secondary">Reset</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="scoreboard-section">
+            <!-- Team 1 -->
+            <div class="team-card glass" data-team="1">
+                <input type="text" class="team-name" value="KK Manggarai" />
+                <div class="score-display" id="score-1">0</div>
+                <div class="score-controls">
+                    <button class="btn-score btn-score-plus">+</button>
+                    <button class="btn-score btn-score-minus">-</button>
+                </div>
+            </div>
+
+            <!-- Team 2 -->
+            <div class="team-card glass" data-team="2">
+                <input type="text" class="team-name" value="KK Rawamangun" />
+                <div class="score-display" id="score-2">0</div>
+                <div class="score-controls">
+                    <button class="btn-score btn-score-plus">+</button>
+                    <button class="btn-score btn-score-minus">-</button>
+                </div>
+            </div>
+
+            <!-- Team 3 -->
+            <div class="team-card glass" data-team="3">
+                <input type="text" class="team-name" value="KK Bekasi" />
+                <div class="score-display" id="score-3">0</div>
+                <div class="score-controls">
+                    <button class="btn-score btn-score-plus">+</button>
+                    <button class="btn-score btn-score-minus">-</button>
+                </div>
+            </div>
+
+            <!-- Team 4 -->
+            <div class="team-card glass" data-team="4">
+                <input type="text" class="team-name" value="KK Utan Kayu" />
+                <div class="score-display" id="score-4">0</div>
+                <div class="score-controls">
+                    <button class="btn-score btn-score-plus">+</button>
+                    <button class="btn-score btn-score-minus">-</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer-controls">
+            <button id="btn-end" class="btn finish-btn">Akhiri Cerdas Cermat</button>
+        </div>
+    </div>
+
+    <!-- Modal for Winner -->
+    <div id="winner-modal" class="modal hidden">
+        <div class="modal-content glass">
+            <h2>🎉 Selesai! 🎉</h2>
+            <p>Selamat kepada Pemenang:</p>
+            <h1 id="winner-team-name" class="winner-name">Tim A</h1>
+            <p class="winner-score">dengan <span id="winner-score-value">0</span> poin!</p>
+            <hr>
+            <p class="thanks-msg">Tetap semangat dan terima kasih kepada seluruh tim yang telah berpartisipasi.</p>
+            <button id="btn-close-modal" class="btn secondary">Tutup</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
