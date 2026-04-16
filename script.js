@@ -4,9 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let initialTime = 10; // Time to reset to
     let timerInterval = null;
     let isRunning = false;
+    let audioCtx = null;
 
     // Timer Elements
     const timerDisplay = document.getElementById('timer-display');
+    const timerCard = document.querySelector('.timer-card');
     const btnPlusTime = document.getElementById('btn-plus-time');
     const btnMinusTime = document.getElementById('btn-minus-time');
     const btnStart = document.getElementById('btn-start');
@@ -25,18 +27,70 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             timerDisplay.classList.remove('low-time');
         }
+        
+        if (time <= 5 && time > 0) {
+            timerCard.classList.add('warning-blink');
+        } else {
+            timerCard.classList.remove('warning-blink');
+        }
     }
     updateTimerDisplay();
+
+    // Audio Functions
+    function initAudio() {
+        if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+    }
+
+    function playWarningSound() {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.value = 1000;
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.2);
+    }
+
+    function playEndSound() {
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(200, audioCtx.currentTime + 1);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1);
+    }
 
     // Timer Functions
     function startTimer() {
         if (isRunning || time <= 0) return;
+        initAudio();
         isRunning = true;
         timerDisplay.classList.add('running');
         timerInterval = setInterval(() => {
             time--;
             updateTimerDisplay();
+            
+            if (time <= 5 && time > 0) {
+                playWarningSound();
+            }
+            
             if (time <= 0) {
+                playEndSound();
                 stopTimer();
             }
         }, 1000);
