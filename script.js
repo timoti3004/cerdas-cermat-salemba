@@ -142,7 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Score Functions
-    const SCORE_STEP = 100;
+    let SCORE_STEP = 100;
+
+    const pointRadios = document.querySelectorAll('input[name="point-step"]');
+    pointRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            SCORE_STEP = parseInt(e.target.value, 10);
+        });
+    });
 
     teamCards.forEach((card, index) => {
         const scoreDisplay = card.querySelector('.score-display');

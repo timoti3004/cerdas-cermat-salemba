@@ -246,6 +246,67 @@ h1 {
     background-color: var(--secondary-hover);
 }
 
+/* Point Settings Section */
+.point-settings-section {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    border-radius: 12px;
+}
+
+.point-settings-title {
+    font-size: 1rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.point-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.point-controls label {
+    cursor: pointer;
+}
+
+.point-controls input[type="radio"] {
+    display: none;
+}
+
+.point-btn {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.point-controls input[type="radio"]:checked + .point-btn {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 0 15px var(--glow);
+    transform: scale(1.05);
+}
+
+.point-controls input[type="radio"]:not(:checked) + .point-btn:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
 /* Scoreboard Section */
 .scoreboard-section {
     display: grid;
